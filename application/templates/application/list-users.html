@@ -1,0 +1,75 @@
+{% extends 'application/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Gestión de usuarios</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Usuarios</li>
+            </ol>
+
+            <div class="row mb-3">
+                <div class="col-md-9">
+                </div>
+                <div class="col-md-3">
+                    <div class="d-grid">
+                        <a href="#" class="btn btn-primary">Agregar usuario</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Listado de usuarios
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Cedula</th>
+                                <th>Nombres y apellidos</th>
+                                <th>Email</th>
+                                <th>Telefono</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for perfil in perfiles %}
+                            <tr>
+                                <td>{{ perfil.id }}</td>
+                                <td>{{ perfil.cedula }}</td>
+                                <td>{{ perfil.user.first_name }} {{ perfil.user.last_name }}</td>
+                                <td>{{ perfil.user.email }}</td>
+                                <td>{{ perfil.telefono }}</td>
+                                <td>
+                                    <a href="{% url 'edit-user' perfil.id %}" class="btn btn-warning btn-sm">Editar</a>
+                                    <a href="{% url 'delete-user' perfil.id %}"
+                                        class="btn btn-danger btn-sm">Eliminar</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+{% endblock %}

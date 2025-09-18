@@ -1,0 +1,131 @@
+{% extends 'application/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-header">
+                            <h3 class="text-center font-weight-light my-4">Actualización información de usuarios
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="">
+                                {% csrf_token %}
+                                {% if error is not None %}
+                                <div class="form-floating mb-3">
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ error }}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <fieldset class="form-group">
+                                    <legend>Datos personales del paciente</legend>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <input class="form-control" id="inputCedula" type="text"
+                                                    name="txtCedula" placeholder="Ingrese su cédula" value="{{ profile.cedula }}" />
+                                                <label for="inputCedula">Cédula</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input class="form-control" id="inputEmail" type="email" name="txtEmail"
+                                                    placeholder="Ingrese su email" value="{{ profile.user.email }}"/>
+                                                <label for="inputEmail">Email</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <input class="form-control" id="inputFirstName" type="text"
+                                                    placeholder="Ingrese sus nombres" name="txtNombres" value="{{ profile.user.first_name }}"/>
+                                                <label for="inputFirstName">Nombres</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input class="form-control" id="inputLastName" type="text"
+                                                    placeholder="Ingrese sus apellidos" name="txtApellidos" value="{{ profile.user.last_name }}" />
+                                                <label for="inputLastName">Apellidos</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <input class="form-control" id="inputTelefono" type="text"
+                                                    placeholder="Ingrese su teléfono" name="txtTelefono" value="{{ profile.telefono }}"/>
+                                                <label for="inputTelefono">Teléfono</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input class="form-control" id="inputFechaCumpleanos" type="date"
+                                                    name="txtFechaCumpleanos" value="{{ profile.fecha_cumpleanos|date:'Y-m-d' }}"/>
+                                                <label for="inputFechaCumpleanos">Fecha de Cumpleaños</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="inputDireccion" type="text"
+                                            placeholder="Ingrese su dirección" name="txtDireccion" value="{{ profile.direccion }}"/>
+                                        <label for="inputDireccion">Dirección</label>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group">
+                                    <legend>Datos para ingreso al sistema</legend>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <input class="form-control" id="inputUsername" type="text"
+                                                    name="txtUsername" placeholder="Ingrese un username" readonly value="{{ profile.user.username }}"/>
+                                                <label for="inputUsername">Username</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="mt-4 mb-0">
+                                    <div class="d-grid">
+                                        <!-- <a class="btn btn-primary btn-block" href="login.html">Crear cuenta</a> -->
+                                        <input type="submit" value="Actualizar datos" class="btn btn-primary btn-block">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- <div id="layoutAuthentication_footer">
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div> -->
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'autenticacion/js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+<script src="{% static 'autenticacion/js/scripts.js' %}"></script>
+{% endblock %}
