@@ -27,6 +27,7 @@ def edit_user(request, profile_id):
         #profile
         profile.cedula = request.POST.get('txtCedula')        
         profile.telefono = request.POST.get('txtTelefono')
+        profile.direccion = request.POST.get('txtDireccion')
         profile.user.save()
         profile.save()
         return render(request, 'application/list-users.html', {
