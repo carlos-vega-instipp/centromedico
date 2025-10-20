@@ -11,12 +11,22 @@
                 <li class="breadcrumb-item active">Usuarios</li>
             </ol>
 
+            <div class="row">
+                {% if mensaje is not None %}
+                <div class="col-md-12">
+                    <div class="alert alert-success" role="alert">
+                        {{ mensaje }}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
             <div class="row mb-3">
                 <div class="col-md-9">
                 </div>
                 <div class="col-md-3">
                     <div class="d-grid">
-                        <a href="#" class="btn btn-primary">Agregar usuario</a>
+                        <a href="{% url 'add-user' %}" class="btn btn-primary">Agregar usuario</a>
                     </div>
                 </div>
             </div>
@@ -35,6 +45,7 @@
                                 <th>Nombres y apellidos</th>
                                 <th>Email</th>
                                 <th>Telefono</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -46,10 +57,15 @@
                                 <td>{{ perfil.user.first_name }} {{ perfil.user.last_name }}</td>
                                 <td>{{ perfil.user.email }}</td>
                                 <td>{{ perfil.telefono }}</td>
+                                <td><a href="#"
+                                        class="btn btn-{% if perfil.user.is_active %}success{% else %}danger{% endif %} btn-sm"><i
+                                            class="bi bi-{% if perfil.user.is_active %}check{% else %}x{% endif %}"></i></a>
+                                </td>
                                 <td>
-                                    <a href="{% url 'edit-user' perfil.id %}" class="btn btn-warning btn-sm">Editar</a>
-                                    <a href="{% url 'delete-user' perfil.id %}"
-                                        class="btn btn-danger btn-sm">Eliminar</a>
+                                    <a href="{% url 'edit-user' perfil.id %}" class="btn btn-warning btn-sm"><i
+                                            class="bi bi-pencil-square"></i></a>
+                                    <a href="{% url 'delete-user' perfil.id %}" class="btn btn-danger btn-sm"><i
+                                            class="bi bi-trash-fill"></i></a>
                                 </td>
                             </tr>
                             {% endfor %}
