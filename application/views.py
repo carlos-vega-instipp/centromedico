@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from autenticacion.models import Profile
 from django.contrib.auth.models import User
@@ -80,6 +80,7 @@ def edit_user(request, profile_id):
         profile.user.first_name = request.POST.get('txtNombres').upper()
         profile.user.last_name = request.POST.get('txtApellidos').upper()
         profile.user.email = request.POST.get('txtEmail')
+        profile.user.is_active = request.POST.get('switchCheck') == 'on'
 
         # profile
         profile.cedula = request.POST.get('txtCedula')
@@ -87,9 +88,7 @@ def edit_user(request, profile_id):
         profile.direccion = request.POST.get('txtDireccion')
         profile.user.save()
         profile.save()
-        return render(request, 'application/list-users.html', {
-            'perfiles': Profile.objects.all()
-        })
+        return redirect('list-users')
     return render(request, 'application/edit-user.html', {'profile': profile})
 
 
