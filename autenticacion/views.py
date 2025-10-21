@@ -67,3 +67,7 @@ def register_view(request):
         return render(request, 'autenticacion/register.html')
 
     return render(request, 'autenticacion/register.html')
+
+def recovery_password_view(request):
+    #logica de negocio para recuperacion de contraseña
+    return render(request, 'autenticacion/recovery_password.html')

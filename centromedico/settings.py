@@ -133,3 +133,6 @@ AUTHENTICATION_BACKENDS = [
     'autenticacion.backends.MultiFieldAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+
+# configuracion para implementaicon de envios de correos electrinicos
