@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from .models import Profile
 from django.db.models import Q
 
+#from django.contrib.auth.forms import PasswordResetForm
+#from django.contrib import messages
+
 # Create your views here.
 
 
@@ -67,3 +70,19 @@ def register_view(request):
         return render(request, 'autenticacion/register.html')
 
     return render(request, 'autenticacion/register.html')
+
+# def resetear_pass(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        if User.objects.filter(email=email).exists():
+            form = PasswordResetForm(request.POST)
+            if form.is_valid():
+                form.save(
+                    request=request,
+                    use_https=request.is_secure(),
+                    email_template_name="autenticacion/password_reset_email.html",
+                )
+                messages.success(request, "Se ha enviado un enlace a su correo.")
+        else:
+            messages.error(request, "El correo no está registrado.")
+    return render(request, "autenticacion/password_reset.html")
