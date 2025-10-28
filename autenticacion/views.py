@@ -4,11 +4,33 @@ from django.contrib.auth.models import User
 from .models import Profile
 from django.db.models import Q
 
-#from django.contrib.auth.forms import PasswordResetForm
-#from django.contrib import messages
+from django.contrib.auth.views import PasswordResetView
+from django.contrib import messages
+
+from django.contrib.auth.views import PasswordResetConfirmView
+from .forms import CustomSetPasswordForm
+from django.urls import reverse_lazy
 
 # Create your views here.
 
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    form_class = CustomSetPasswordForm
+    template_name = 'autenticacion/password_reset_confirm.html'
+    success_url = reverse_lazy('password_reset_complete')
+
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'autenticacion/password_reset_form.html'
+    email_template_name = 'registration/password_reset_email.html'
+    success_url = '/autenticacion/password_reset/done/'
+
+    def post(self, request, *args, **kwargs):
+        email = request.POST.get('email')
+        if not User.objects.filter(email=email).exists():
+            messages.error(request, 'El correo ingresado no está registrado en el sistema.')
+            return redirect('password_reset')  # Nombre del path de la URL
+        return super().post(request, *args, **kwargs)
 
 def login_view(request):
     if request.method == 'GET':
