@@ -1,0 +1,29 @@
+body {
+    background-color: #007bff; /* Fondo azul general */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card {
+    border-radius: 12px;
+    background-color: #007bff; /* Fondo azul también en la tarjeta */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.card-body {
+    padding: 2rem;
+    background-color: #ffffff; /* Fondo blanco dentro de la tarjeta */
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #333333;
+}

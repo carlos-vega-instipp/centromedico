@@ -127,3 +127,4 @@ def generar_contraseña():
     random.shuffle(contrasena)
 
     return ''.join(contrasena)
+

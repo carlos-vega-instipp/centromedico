@@ -27,7 +27,8 @@
                                 </div>
                                 <div class="card-body">
                                     <form method="POST" action="{% url 'login' %}">
-                                        {% csrf_token %}
+                                        
+
                                         {% if error is not None %}
                                         <div class="form-floating mb-3">
                                             <div class="alert alert-danger" role="alert">
@@ -36,12 +37,14 @@
                                         </div>
                                         {% endif %}
                                         {% if message is not None %}
-                                        <div class="form-floating mb-3">
+                                         <div class="form-floating mb-3">
                                             <div class="alert alert-danger" role="alert">
                                                 {{ message }}    
                                             </div>
                                         </div>
                                         {% endif %}
+
+                                        {% csrf_token %}
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="inputUsername" type="text"
                                                 placeholder="your username" name="inputUsername" />
@@ -59,7 +62,8 @@
                                                 Password</label>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="password.html">Forgot Password?</a>
+                                           <a class="small" href="{% url 'password' %}">Forgot Password?</a>
+
                                             <!-- <a class="btn btn-primary" href="index.html">Login</a> -->
                                             <input type="submit" value="Login" class="btn btn-primary" />
                                         </div>

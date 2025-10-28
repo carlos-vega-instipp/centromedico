@@ -31,11 +31,12 @@
                                         {% csrf_token %}
                                         {% if error is not None %}
                                         <div class="form-floating mb-3">
-                                            <div class="alert alert-danger" role="alert">
+                                            <div class="alert alert-success" role="alert">
                                                 {{ error }}    
                                             </div>
                                         </div>
                                         {% endif %}
+                                        
                                         <fieldset class="form-group">
                                             <legend>Datos personales del paciente</legend>
                                             <div class="row mb-3">

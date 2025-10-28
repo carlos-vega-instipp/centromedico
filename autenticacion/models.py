@@ -7,6 +7,10 @@ class Profile(models.Model):
     fecha_cumpleanos = models.DateField(blank=False, null=True)
     direccion = models.CharField(max_length=255, blank=True, null=True)
     cedula = models.CharField(max_length=15, blank=True, null=True)
+    temp_password = models.CharField(max_length=50, null=True, blank=True)
+    temp_password_expiration = models.DateTimeField(null=True, blank=True) 
+
+    
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
