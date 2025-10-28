@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.contrib import admin
 from django.urls import include, path
 
@@ -5,4 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('autenticacion/', include('autenticacion.urls')),
     path('application/', include('application.urls')),
+        path('', lambda request: redirect('login')),
 ]

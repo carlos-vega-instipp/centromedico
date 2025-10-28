@@ -1,15 +1,13 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Login</title>
+    <title>Verificar Código</title>
     <link href="{% static 'autenticacion/css/styles.css' %}" rel="stylesheet" />
     <script src="{% static 'autenticacion/js/all.js' %}" crossorigin="anonymous"></script>
 </head>
@@ -23,51 +21,40 @@
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Login</h3>
+                                    <h3 class="text-center font-weight-light my-4">Ingresa el Código</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form method="POST" action="{% url 'login' %}">
+                                    <form method="POST" action="{% url 'verify_code' %}">
                                         {% csrf_token %}
-                                        {% if error is not None %}
+                                        {% if error %}
                                         <div class="form-floating mb-3">
                                             <div class="alert alert-danger" role="alert">
-                                                {{ error }}    
+                                                {{ error }}
                                             </div>
                                         </div>
                                         {% endif %}
-                                        {% if message is not None %}
+                                        {% if message %}
                                         <div class="form-floating mb-3">
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ message }}    
+                                            <div class="alert alert-success" role="alert">
+                                                {{ message }}
                                             </div>
                                         </div>
                                         {% endif %}
+                                        <!-- Campo oculto para pasar el correo del usuario -->
+                                        <input type="hidden" name="email" value="{{ email }}">
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputUsername" type="text"
-                                                placeholder="your username" name="inputUsername" />
-                                            <label for="inputUsername">Username/Correo electrónico/Cédula</label>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputPassword" type="password"
-                                                placeholder="Password" name="inputPassword" />
-                                            <label for="inputPassword">Password</label>
-                                        </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" id="inputRememberPassword" type="checkbox"
-                                                value="" />
-                                            <label class="form-check-label" for="inputRememberPassword">Remember
-                                                Password</label>
+                                            <input class="form-control" id="inputCode" type="text"
+                                                placeholder="Código" name="code" required />
+                                            <label for="inputCode">Ingresa el código recibido</label>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="{% url 'password' %}">Forgot Password?</a>
-                                            <!-- <a class="btn btn-primary" href="index.html">Login</a> -->
-                                            <input type="submit" value="Login" class="btn btn-primary" />
+                                            <a class="small" href="{% url 'forgot_password' %}">Regresar a Correo</a>
+                                            <input type="submit" value="Verificar Código" class="btn btn-primary" />
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center py-3">
-                                    <div class="small"><a href="{% url 'register' %}">Need an account? Sign up!</a>
-                                    </div>
+                                    <div class="small"><a href="{% url 'register' %}">Need an account? Sign up!</a></div>
                                 </div>
                             </div>
                         </div>
