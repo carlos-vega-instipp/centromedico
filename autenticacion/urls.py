@@ -11,7 +11,7 @@ urlpatterns = [
 
 #urls para restrablecer pass
 
-    path('password_reset/', CustomPasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/', CustomPasswordResetView.as_view(email_template_name='autenticacion/password_reset_email.html'), name='password_reset'),
     #path('password_reset/', auth_views.PasswordResetView.as_view(template_name='autenticacion/password_reset_form.html', email_template_name='autenticacion/password_reset_email.html'), name='password_reset'),
 
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='autenticacion/password_reset_done.html'), name='password_reset_done'),
