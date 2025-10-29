@@ -133,17 +133,18 @@ AUTHENTICATION_BACKENDS = [
     'autenticacion.backends.MultiFieldAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
 # =========================================================
 # CONFIGURACIÓN PARA CORREO REAL (Usando GMAIL con .env)
 # =========================================================
 # 1. Usar el backend SMTP real de Django
-EMAIL_BACKEND = 'centromedico.custom_email_backend.NonVerifyingEmailBackend'
-
+# EMAIL_BACKEND = 'centromedico.custom_email_backend.NonVerifyingEmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587        # Puerto TLS (Ya lo tenías bien)
 EMAIL_USE_TLS = True    # Activar TLS (Ya lo tenías bien)
 EMAIL_USE_SSL = False   # Desactivar SSL (Ya lo tenías bien)
 # 3. Tus credenciales cargadas de forma SEGURA desde el .env
 # Esto requiere que tu .env contenga: EMAIL_USER=... y EMAIL_PASS=...
-EMAIL_HOST_USER = os.getenv("EMAIL_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
