@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from autenticacion.models import Profile
 from django.contrib.auth.models import User
-import random
-import string
+from .utils import generar_contraseña
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -65,6 +65,15 @@ def add_user(request):
             fecha_cumpleanos=fechaCumpleanos_
         )
 
+        # Enviar correo con la contraseña generada
+        send_mail(
+            subject='Creación de usuario nuevo con contraseña generada',
+            message=f"Se ha creado un usuario con username {username_} y contraseña {password_}. Por favor, cambie su contraseña después de iniciar sesión.",
+            from_email=None,  # usa DEFAULT_FROM_EMAIL
+            recipient_list=[email_],
+            fail_silently=False,
+        )
+
         return render(request, 'application/list-users.html', {
             'perfiles': Profile.objects.all(),
             'mensaje': 'Usuario creado correctamente.'
@@ -102,28 +111,3 @@ def delete_user(request, profile_id):
             'perfiles': Profile.objects.all()
         })
     return render(request, 'application/delete-user.html', {'profile': profile})
-
-
-def generar_contraseña():
-    # Definir los conjuntos de caracteres
-    mayusculas = string.ascii_uppercase
-    minusculas = string.ascii_lowercase
-    numeros = string.digits
-    especiales = '@.!_$'
-
-    # Asegurar al menos un carácter de cada tipo
-    contrasena = [
-        random.choice(mayusculas),
-        random.choice(minusculas),
-        random.choice(numeros),
-        random.choice(especiales)
-    ]
-
-    # Completar hasta 8 caracteres con caracteres aleatorios de todos los tipos
-    todos_caracteres = mayusculas + minusculas + numeros + especiales
-    contrasena.extend(random.choice(todos_caracteres) for _ in range(4))
-
-    # Mezclar la contraseña
-    random.shuffle(contrasena)
-
-    return ''.join(contrasena)
