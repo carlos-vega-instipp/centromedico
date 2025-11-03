@@ -22,3 +22,6 @@ static_root/
 # OS
 .DS_Store
 Thumbs.db
+
+# Testing
+.coverage
