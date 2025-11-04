@@ -6,7 +6,7 @@ from django.core import mail
 from django.test.client import Client
 from urllib.parse import urlsplit
 from django.contrib.auth.models import User
-from autenticacion.models import Profile  # ajusta si tu Profile vive en otra app
+from autenticacion.models import Profile
 
 
 @pytest.mark.django_db
