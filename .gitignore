@@ -23,5 +23,8 @@ static_root/
 .DS_Store
 Thumbs.db
 
-# Testing
+# Testing and reports
 .coverage
+htmlcov/
+report*.html
+artifacts/
