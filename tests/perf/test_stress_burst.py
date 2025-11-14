@@ -5,7 +5,7 @@ import requests
 import pytest
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-USERS = int(os.getenv("BURST_USERS", "20"))          # hilos concurrentes
+USERS = int(os.getenv("BURST_USERS", "20"))          # usuarios concurrentes
 REQUESTS = int(os.getenv("BURST_REQUESTS", "100"))   # total de requests
 P95_MS = int(os.getenv("P95_MS", "2500"))            # umbral p95
 ERROR_RATE_MAX = float(os.getenv("ERROR_RATE_MAX", "0.05"))  # 5%
