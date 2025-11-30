@@ -36,5 +36,5 @@ class CustomPasswordResetForm(PasswordResetForm):
         # Solo usuarios activos; ajusta si lo necesitas
         if not User.objects.filter(email__iexact=email, is_active=True).exists():
             # ← aquí forzamos el error visible en la plantilla
-            raise ValidationError("El correo electrónico no se encuentra registrado.")
+            raise ValidationError("Si el correo existe en el sistema, se ha enviado un mensaje con instrucciones.")
         return email

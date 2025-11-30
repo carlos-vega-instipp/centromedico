@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from autenticacion.models import Profile
 from django.contrib.auth.models import User
 from .utils import generar_contraseña
 from django.core.mail import send_mail
+from .helpers import is_admin
 
 # Create your views here.
 
@@ -14,6 +15,7 @@ def home(request):
 
 
 @login_required
+@user_passes_test(is_admin, login_url='no-permission')
 def list_users(request):
     perfiles = Profile.objects.all()
     return render(request, 'application/list-users.html', {
