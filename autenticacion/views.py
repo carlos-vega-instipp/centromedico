@@ -26,12 +26,12 @@ def login_view(request):
             })
         else:
             login(request, user)
-            return redirect('home')
+            return render(request, 'application/home.html')
 
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return render(request, 'autenticacion/login.html')
 
 
 def register_view(request):
@@ -111,7 +111,7 @@ def password_reset_request(request):
             # --- Criterio 2: Usuario No Encontrado (Fallo) ---
 
             # Criterio de Aceptación: Mostrar mensaje de error en la interfaz
-            context['error'] = "El correo electrónico ingresado no se encuentra registrado."
+            context['error'] = "Si el correo existe en el sistema, se ha enviado un mensaje con instrucciones."
 
         return render(request, 'autenticacion/password_reset_form.html', context)
 
@@ -121,3 +121,6 @@ def password_reset_request(request):
 def password_reset_confirm(request):
     """Simula la interfaz a la que llega el usuario para ingresar la clave temporal/nueva."""
     return render(request, 'autenticacion/password_reset_confirm.html', {})
+
+def no_permission_view(request):
+    return render(request, 'autenticacion/403.html')

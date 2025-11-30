@@ -6,6 +6,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'), 
     path('register/', views.register_view, name='register'), 
     path('logout/', views.logout_view, name='logout'), 
+    path('sin-permiso/', views.no_permission_view, name='no-permission'), 
     # 2.1 Pide el correo electrónico (Usaremos tu plantilla 'password_reset_form.html')
     path(
         'password_reset/', 
