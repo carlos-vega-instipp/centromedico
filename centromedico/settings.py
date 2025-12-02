@@ -4,19 +4,20 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / ".env") # Cargar variables de entorno desde el archivo .env
+# Cargar variables de entorno desde el archivo .env
+load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-+f_54ef5ze1jx%^r&8szwaag*lt7ww@7@=e9x44%*qbji3$^pe'
+# SECRET_KEY = 'django-insecure-+f_54ef5ze1jx%^r&8szwaag*lt7ww@7@=e9x44%*qbji3$^pe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
+# DEBUG = True
 
-#ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-unsafe-secret-key")
 DEBUG = os.getenv("DEBUG", "True") == "True"
@@ -34,6 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'autenticacion',
     'application',
+    'api_rest',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +152,21 @@ EMAIL_USE_SSL = False   # Desactivar SSL (Ya lo tenías bien)
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
+
+# =========================================================
+# CONFIGURACIÓN PARA DJANGO REST FRAMEWORK
+# =========================================================
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+# =========================================================
+
+# PAGINACIÓN POR DEFECTO PARA DRF
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
