@@ -6,9 +6,9 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Gestión de usuarios</h1>
+            <h1 class="mt-4">Gestión de permisos</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Usuarios</li>
+                <li class="breadcrumb-item active">Permisos</li>
             </ol>
 
             <div class="row">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="d-grid">
-                        <a href="{% url 'add-user' %}" class="btn btn-primary">Agregar usuario</a>
+                        <a href="{% url 'add-permission' %}" class="btn btn-primary">Agregar permiso</a>
                     </div>
                 </div>
             </div>
@@ -35,38 +35,36 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
-                    Listado de usuarios
+                    Listado de permisos
                 </div>
                 <div class="card-body">
                     <table id="datatablesSimple">
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Cedula</th>
-                                <th>Nombres y apellidos</th>
-                                <th>Email</th>
-                                <th>Telefono</th>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                <th>Fecha asignación</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for perfil in perfiles %}
+                            {% for permiso in permisos %}
                             <tr>
-                                <td>{{ perfil.id }}</td>
-                                <td>{{ perfil.cedula }}</td>
-                                <td>{{ perfil.user.first_name }} {{ perfil.user.last_name }}</td>
-                                <td>{{ perfil.user.email }}</td>
-                                <td>{{ perfil.telefono }}</td>
+                                <td>{{ permiso.id }}</td>
+                                <td>{{ permiso.user.first_name }} {{ permiso.user.last_name }}</td>
+                                <td>{{ permiso.group.name }}</td>
+                                <td>{{ permiso.fecha_asignacion }}</td>
                                 <td>
                                     <span
-                                        class="{% if perfil.user.is_active %}badge badge-success{% else %}badge badge-danger{% endif %}">
-                                        {% if perfil.user.is_active %}Activo{% else %}Inactivo{% endif %}</span>
+                                        class="{% if permiso.estado %}badge badge-success{% else %}badge badge-danger{% endif %}">
+                                        {% if permiso.estado %}Activo{% else %}Inactivo{% endif %}</span>
                                 </td>
                                 <td>
-                                    <a href="{% url 'edit-user' perfil.id %}" class="btn btn-warning btn-sm"><i
+                                    <a href="{% url 'edit-permission' permiso.id %}" class="btn btn-warning btn-sm"><i
                                             class="bi bi-pencil-square"></i></a>
-                                    <a href="{% url 'delete-user' perfil.id %}" class="btn btn-danger btn-sm"><i
+                                    <a href="{% url 'delete-permission' permiso.id %}" class="btn btn-danger btn-sm"><i
                                             class="bi bi-trash-fill"></i></a>
                                 </td>
                             </tr>

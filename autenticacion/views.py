@@ -11,7 +11,6 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
-@cache_page(60*15)  # Cachea la vista por 15 minutos
 def login_view(request):
     if request.method == 'GET':
         return render(request, 'autenticacion/login.html', {
@@ -26,7 +25,7 @@ def login_view(request):
             })
         else:
             login(request, user)
-            return render(request, 'application/home.html')
+            return redirect('home')
 
 
 def logout_view(request):
@@ -121,6 +120,7 @@ def password_reset_request(request):
 def password_reset_confirm(request):
     """Simula la interfaz a la que llega el usuario para ingresar la clave temporal/nueva."""
     return render(request, 'autenticacion/password_reset_confirm.html', {})
+
 
 def no_permission_view(request):
     return render(request, 'autenticacion/403.html')
