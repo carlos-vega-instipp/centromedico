@@ -1,0 +1,54 @@
+{% extends 'application/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-header">
+                            <h3 class="text-center font-weight-light my-4">Registro de rol
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="">
+                                {% csrf_token %}
+                                {% if error is not None %}
+                                <div class="form-floating mb-3">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ error }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                </div>
+                                {% endif %}
+                                <fieldset class="form-group">
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <input class="form-control" id="inputRol" type="text"
+                                                    name="txtNombreRol" placeholder="Ingrese el nombre del rol" value="" />
+                                                <label for="inputCedula">Nombre del rol</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="mt-4 mb-0">
+                                    <div class="d-grid">
+                                        <input type="submit" value="Registrar rol"
+                                            class="btn btn-primary btn-block">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}
