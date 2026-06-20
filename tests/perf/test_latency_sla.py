@@ -4,7 +4,7 @@ import requests
 import pytest
 
 # Permite ajustar el SLA sin tocar el código: SLA_MS=2000 pytest -k perf
-SLA_MS = int(os.getenv("SLA_MS", 2500))
+SLA_MS = int(os.getenv("SLA_MS", 2100))
 
 
 @pytest.mark.perf
